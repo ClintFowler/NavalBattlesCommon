@@ -6,9 +6,8 @@ import java.util.ArrayList;
 /**
  * Created by Clinton on 7/16/2015.
  */
-public class GameboardArrays implements Serializable {
-    private int[][] shipArray;
-    private int[][] publicboard;
+public class GameboardArray implements Serializable {
+    private int[][] gameBoard;
     private int xsize = 10;
     private int ysize = 10;
 
@@ -19,16 +18,10 @@ public class GameboardArrays implements Serializable {
 
 
 
-    public GameboardArrays()
+    public GameboardArray()
     {
-        shipArray = new int[xsize][ysize];
-        publicboard = new int[xsize][ysize];
-        initializeBoard();
-    }
-
-    public GameboardArrays(ArrayList<Ship> addships)
-    {
-        //TODO: constructor
+        gameBoard = new int[xsize][ysize];
+        //initializeBoard(); //are we going to initialize to a set value or work with null?
     }
     
     public void initializeBoard()
@@ -37,8 +30,7 @@ public class GameboardArrays implements Serializable {
     	{
     		for(int col = 0; col < ysize; col++)
     		{
-    			shipArray[row][col] = 0;
-    			publicboard[row][col] = 7;
+    			gameBoard[row][col] = 7;
     		}
     	}
     }
@@ -50,31 +42,32 @@ public class GameboardArrays implements Serializable {
     	{
     		for(int col = 0; col < ysize; col++)
     		{
-    			System.out.print(" " + shipArray[row][col] + " ");
+    			System.out.print(" " + gameBoard[row][col] + " ");
     		}
     		System.out.println();
     	}
     }
-    
-    public void printPublicBoard()
-    {
-    	System.out.println("BATTLESHIP\n");
-    	for(int row = 0; row < xsize; row++)
-    	{
-    		for(int col = 0; col < ysize; col++)
-    		{
-    			if(publicboard[row][col] != 7)
-    			{
-    				System.out.print(" " + publicboard[row][col] + " ");
-    			}
-    			else
-    			{
-    				System.out.print(" ~ ");
-    			}
-    		}
-    		System.out.println();
-    	}
-    }
+
+//    this can be all handled with the printBoard method.
+//    public void printPublicBoard()
+//    {
+//    	System.out.println("BATTLESHIP\n");
+//    	for(int row = 0; row < xsize; row++)
+//    	{
+//    		for(int col = 0; col < ysize; col++)
+//    		{
+//    			if(publicboard[row][col] != 7)
+//    			{
+//    				System.out.print(" " + publicboard[row][col] + " ");
+//    			}
+//    			else
+//    			{
+//    				System.out.print(" ~ ");
+//    			}
+//    		}
+//    		System.out.println();
+//    	}
+//    }
     
     public void addShips(int size, int xcoord, int ycoord, String direction)
     {
@@ -94,7 +87,7 @@ public class GameboardArrays implements Serializable {
 		{
     		if(checkOutOfBound(xcoord, ycoord))
     		{
-    			shipArray[xcoord][ycoord] = size;
+    			gameBoard[xcoord][ycoord] = size;
     			ycoord++;
     		}
 		}
@@ -106,7 +99,7 @@ public class GameboardArrays implements Serializable {
 		{
     		if(checkOutOfBound(xcoord, ycoord))
     		{
-    			shipArray[xcoord][ycoord] = size;
+    			gameBoard[xcoord][ycoord] = size;
     			xcoord++;
     		}
 		}
@@ -127,22 +120,33 @@ public class GameboardArrays implements Serializable {
     //Accessor Methods
     public int[][] getPublicboard()
     {
-        int[][] viewableboard = publicboard.clone();
+        int[][] viewableboard = gameBoard.clone();
 
         return viewableboard;
     }
 
-    public void addGuess(int x, int y)
-    {
-        //TODO: addGuess
-    	if(shipArray[x][y] != 0)
-    	{
-    		publicboard[x][y] = HIT;
-    	}
-    	else
-    	{
-    		publicboard[x][y] = MISS;
-    	}
-    }
+	protected void addHit(int x, int y)
+	{
+		gameBoard[x][y] = HIT;
+	}
+
+	protected void addMiss(int x, int y)
+	{
+		gameBoard[x][y] = MISS;
+	}
+
+//	  Need to rethink the guessing portion for the gameboard.
+//    public void addGuess(int x, int y)
+//    {
+//        //TODO: addGuess
+//    	if(shipArray[x][y] != 0)
+//    	{
+//    		publicboard[x][y] = HIT;
+//    	}
+//    	else
+//    	{
+//    		publicboard[x][y] = MISS;
+//    	}
+//    }
 }
 
