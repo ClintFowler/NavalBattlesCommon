@@ -53,7 +53,7 @@ public class ServerConnection implements Runnable
 
     }
 
-    protected void sendMessage(/*message*/)
+    protected void sendMessage(/*Messageclass message*/)
     {
         try
         {

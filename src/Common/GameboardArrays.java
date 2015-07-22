@@ -11,6 +11,8 @@ public class GameboardArrays implements Serializable {
     private int[][] publicboard;
     private int xsize = 10;
     private int ysize = 10;
+
+    //class constants
     public static final int HIT = 1;
     public static final int MISS = 0;
 
@@ -33,7 +35,7 @@ public class GameboardArrays implements Serializable {
 
     public int[][] getPublicboard()
     {
-        int[][] viewableboard = publicboard;
+        int[][] viewableboard = publicboard.clone();
 
         return viewableboard;
     }

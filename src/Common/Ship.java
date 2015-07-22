@@ -1,5 +1,7 @@
 package Common;
 
+import java.util.ArrayList;
+
 /**
  * Created by Clinton on 7/16/2015.
  */
@@ -10,6 +12,7 @@ public class Ship
     private int xcoordinate;
     private int ycoordinate;
     private int hits;
+    private ArrayList<int[]> availhits;
 
     public Ship(int ssize, String facing, int x, int y)
     {
@@ -18,7 +21,23 @@ public class Ship
         xcoordinate = x;
         ycoordinate = y;
         hits = 0;
+        availhits = new ArrayList<int[]>();
     }
+
+    protected Boolean hitShip(int x, int y)
+    {
+        for(int[] i : availhits)
+        {
+            if(i[0] == x && i[1] == y)
+            {
+                return true;
+
+            }
+        }
+        return false;
+    }
+
+    //TODO: method to check available hits. boolean is sunk
 
     //Accessor Methods
     protected int getXcoordinate()
