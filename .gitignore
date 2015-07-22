@@ -3,3 +3,5 @@
 /src/NBClient/
 
 #Files to ignore
+/bin
+.gitignore
