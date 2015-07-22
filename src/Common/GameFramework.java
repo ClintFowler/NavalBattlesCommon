@@ -5,20 +5,10 @@ package Common;
  */
 public class GameFramework
 {
-    //game constants
-    public static final int CARRIER = 5;
-    public static final int BATTLESHIP = 4;
-    public static final int SUBMARINE = 3;
-    public static final int CRUISER = 3;
-    public static final int DESTROYER = 2;
-    public static final String NORTH = "NORTH";
-    public static final String SOUTH = "SOUTH";
-    public static final String EAST = "EAST";
-    public static final String WEST = "WEST";
 
     // basic structure for game
     private ServerConnection server;
-    private String userid = "Clint";
+    private String userid = "";
     //add your game client window class here
 
     public GameFramework()
