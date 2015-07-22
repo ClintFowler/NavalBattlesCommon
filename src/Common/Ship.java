@@ -11,16 +11,18 @@ public class Ship
     private String direction;
     private int xcoordinate;
     private int ycoordinate;
-    private int hits;
     private ArrayList<int[]> availhits;
+    private String name;
+    public static final String HORIZONTAL = "HORIZONTAL";
+    public static final String VERTICAL = "VERTICAL";
 
-    public Ship(int ssize, String facing, int x, int y)
+    public Ship(int ssize, String label)
     {
         size = ssize;
-        direction = facing;
-        xcoordinate = x;
-        ycoordinate = y;
-        hits = 0;
+        name = label;
+        direction = VERTICAL;
+        xcoordinate = 0;
+        ycoordinate = 0;
         availhits = new ArrayList<int[]>();
     }
 
@@ -31,13 +33,32 @@ public class Ship
             if(i[0] == x && i[1] == y)
             {
                 return true;
-
             }
         }
         return false;
     }
 
-    //TODO: method to check available hits. boolean is sunk
+    protected void setLocation(int x, int y)
+    {
+        xcoordinate = x;
+        ycoordinate = y;
+        availhits.clear();
+        for (int i = 0; i<size; i++)
+        {
+            int[] loc = new int[2];
+            if (direction.equals(HORIZONTAL))
+            {
+                loc[0] = xcoordinate + i;
+                loc[1] = ycoordinate;
+            }
+            else
+            {
+                loc[0] = xcoordinate;
+                loc[1] = ycoordinate + i;
+            }
+            availhits.add(loc);
+        }
+    }
 
     //Accessor Methods
     protected int getXcoordinate()
@@ -64,20 +85,42 @@ public class Ship
         return d;
     }
 
-    protected void addHit()
+    protected void changeDirection()
     {
-        if(hits < size)
+        if(direction.equals(HORIZONTAL))
         {
-            hits++;
+            direction = VERTICAL;
+        }
+        else
+        {
+            direction = HORIZONTAL;
         }
     }
 
     protected boolean hasBeenSunk()
     {
-        if (hits == size)
+        if(availhits.size() > 0)
         {
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
+
+//    These two methods will need to be changed.
+//    protected void addHit()
+//    {
+//        if(hits < size)
+//        {
+//            hits++;
+//        }
+//    }
+//
+//    protected boolean hasBeenSunk()
+//    {
+//        if (hits == size)
+//        {
+//            return true;
+//        }
+//        return false;
+//    }
 }
