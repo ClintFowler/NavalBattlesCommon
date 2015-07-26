@@ -9,7 +9,7 @@ public class GameFramework
     // basic structure for game
     private ServerConnection server;
     private String userid = "";
-    //add your game client window class here
+    //add your game client class here
 
     public GameFramework()
     {

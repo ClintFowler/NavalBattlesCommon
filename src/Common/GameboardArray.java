@@ -1,7 +1,6 @@
 package Common;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 /**
  * Created by Clinton on 7/16/2015.
