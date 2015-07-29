@@ -3,7 +3,7 @@ package Common;
 import java.io.Serializable;
 
 /**
- * Created by Clinton on 7/16/2015.
+ * Joint class by Battleship group on 7/16/2015.
  */
 public class GameboardArray implements Serializable {
     private int[][] gameBoard;
