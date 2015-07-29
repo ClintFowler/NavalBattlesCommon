@@ -1,5 +1,7 @@
 package Common;
 
+import NavalBattles.Client;
+
 /**
  * Created by Clinton on 7/16/2015.
  */
@@ -19,12 +21,12 @@ public class GameFramework
     // basic structure for game
     private ServerConnection server;
     private String userid = "Clint";
-    //add your game client window class here
+    private Client client;
 
     public GameFramework()
     {
         server = new ServerConnection(this, userid);
-        //call your game client constructor
+        client = new Client();
     }
 
     //Handle incoming messages

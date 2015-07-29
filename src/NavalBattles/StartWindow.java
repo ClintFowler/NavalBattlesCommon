@@ -1,11 +1,15 @@
 package NavalBattles;
 
 import Common.GameFramework;
+import javafx.scene.text.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  * Created by Clinton on 7/18/2015.
@@ -17,49 +21,71 @@ public class StartWindow extends JFrame
         super("Navel Battles Launcher");
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setResizable(false);
-        this.setPreferredSize(new Dimension(600, 400));
-        this.setLayout(new BorderLayout());
+        this.setSize(600,400);
         constructwindow();
 
-        this.pack();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
 
     private void constructwindow()
     {
-        Dimension buttonsize = new Dimension(100,30);
         this.setContentPane(new JLabel(new ImageIcon("Resources/Images/Battleship6x4.png")));
-        JPanel background = new JPanel(new GridLayout(3,1));
-        background.setPreferredSize(new Dimension(100,100));
+        this.setLayout(null);
 
-        final JButton start = new JButton("START GAME");
-        start.setPreferredSize(buttonsize);
-        start.setForeground(Color.WHITE);
-        start.setVisible(true);
-        start.addActionListener(new ActionListener() {
+        JLabel title = new JLabel("NAVAL BATTLES");
+        title.setSize(300, 40);
+        title.setForeground(Color.CYAN);
+        title.setFont(new Font("Serif", Font.BOLD, 35));
+
+        final JLabel start = new JLabel("START");
+        start.setSize(150, 30);
+        start.setForeground(Color.CYAN);
+        start.setFont(new Font("Serif", Font.BOLD, 20));
+        start.addMouseListener(new MouseAdapter() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void mouseEntered(MouseEvent e) {
+                start.setFont(new Font("Serif", Font.BOLD, 25));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                start.setFont(new Font("Serif", Font.BOLD, 20));
+            }
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
                 startGame();
             }
         });
 
-        JButton exit = new JButton("EXIT");
-        exit.setPreferredSize(buttonsize);
-        exit.setForeground(Color.WHITE);
-        exit.setVisible(true);
-        exit.addActionListener(new ActionListener() {
+        final JLabel exit = new JLabel("EXIT");
+        exit.setSize(150, 30);
+        exit.setForeground(Color.CYAN);
+        exit.setFont(new Font("Serif", Font.BOLD, 20));
+        exit.addMouseListener(new MouseAdapter() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void mouseEntered(MouseEvent e) {
+                exit.setFont(new Font("Serif", Font.BOLD, 25));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                exit.setFont(new Font("Serif", Font.BOLD, 20));
+            }
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
                 Runtime.getRuntime().exit(0);
             }
         });
 
-        background.add(start);
-        background.add((new JLabel())); //Spacer for grid layout
-        background.add(exit);
-        this.add(background, BorderLayout.CENTER);
-        background.updateUI();
+        title.setLocation(150,40);
+        start.setLocation(265, 130);
+        exit.setLocation(275, 210);
+        this.add(start);
+        this.add(exit);
+        this.add(title);
     }
 
     private void startGame()
