@@ -4,7 +4,7 @@ import java.io.*;
 import java.net.Socket;
 
 /**
- * Created by Clinton on 7/16/2015.
+ * Joint class by Battleship group on 7/16/2015.
  */
 public class ServerConnection implements Runnable
 {
@@ -53,7 +53,7 @@ public class ServerConnection implements Runnable
 
     }
 
-    protected void sendMessage(/*message*/)
+    protected void sendMessage(/*Messageclass message*/)
     {
         try
         {

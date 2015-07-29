@@ -2,3 +2,5 @@
 /.idea/
 
 #Files to ignore
+/bin
+.gitignore
