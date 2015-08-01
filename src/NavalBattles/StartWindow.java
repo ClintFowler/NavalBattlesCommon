@@ -34,23 +34,27 @@ public class StartWindow extends JFrame
         this.setLayout(null);
 
         JLabel title = new JLabel("NAVAL BATTLES");
-        title.setSize(300, 40);
-        title.setForeground(Color.CYAN);
-        title.setFont(new Font("Serif", Font.BOLD, 35));
+        title.setSize(400, 40);
+        title.setForeground(Color.RED);
+        title.setFont(new Font("Serif", Font.BOLD, 45));
 
         final JLabel start = new JLabel("START");
-        start.setSize(150, 30);
-        start.setForeground(Color.CYAN);
-        start.setFont(new Font("Serif", Font.BOLD, 20));
+        start.setSize(175, 50);
+        start.setForeground(Color.BLUE);
+        start.setFont(new Font("Serif", Font.BOLD, 40));
         start.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseEntered(MouseEvent e) {
-                start.setFont(new Font("Serif", Font.BOLD, 25));
+            public void mouseEntered(MouseEvent e)
+            {
+                start.setFont(new Font("Serif", Font.BOLD, 45));
+                start.setForeground(Color.RED);
             }
 
             @Override
-            public void mouseExited(MouseEvent e) {
-                start.setFont(new Font("Serif", Font.BOLD, 20));
+            public void mouseExited(MouseEvent e)
+            {
+                start.setFont(new Font("Serif", Font.BOLD, 40));
+                start.setForeground(Color.BLUE);
             }
 
             @Override
@@ -60,18 +64,22 @@ public class StartWindow extends JFrame
         });
 
         final JLabel exit = new JLabel("EXIT");
-        exit.setSize(150, 30);
-        exit.setForeground(Color.CYAN);
-        exit.setFont(new Font("Serif", Font.BOLD, 20));
+        exit.setSize(150, 50);
+        exit.setForeground(Color.WHITE);
+        exit.setFont(new Font("Serif", Font.BOLD, 40));
         exit.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseEntered(MouseEvent e) {
-                exit.setFont(new Font("Serif", Font.BOLD, 25));
+            public void mouseEntered(MouseEvent e)
+            {
+                exit.setFont(new Font("Serif", Font.BOLD, 45));
+                exit.setForeground(Color.RED);
             }
 
             @Override
-            public void mouseExited(MouseEvent e) {
-                exit.setFont(new Font("Serif", Font.BOLD, 20));
+            public void mouseExited(MouseEvent e)
+            {
+                exit.setFont(new Font("Serif", Font.BOLD, 40));
+                exit.setForeground(Color.WHITE);
             }
 
             @Override
@@ -80,9 +88,9 @@ public class StartWindow extends JFrame
             }
         });
 
-        title.setLocation(150,40);
-        start.setLocation(265, 130);
-        exit.setLocation(275, 210);
+        title.setLocation(115,40);
+        start.setLocation(240, 130);
+        exit.setLocation(260, 210);
         this.add(start);
         this.add(exit);
         this.add(title);
