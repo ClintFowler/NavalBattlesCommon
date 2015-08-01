@@ -206,6 +206,7 @@ public class Client extends JFrame
     public void addSystemMessage(String sysmessage)
     {
         systemMessages.append(sysmessage +"\n\n");
+        systemMessages.setCaretPosition(systemMessages.getText().length());
     }
 
     //test method
