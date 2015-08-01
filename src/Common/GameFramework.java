@@ -25,12 +25,12 @@ public class GameFramework
 
     protected void failedConnection()
     {
-        client.addIncomingChat("***************************\nSYSTEM: FAILED TO CONNECT\n***************************");
+        client.addSystemMessage("SYSTEM: FAILED TO CONNECT");
     }
 
     protected void serverConnected()
     {
-        client.addIncomingChat("***************************\nSYSTEM: CONNECTED TO SERVER\n***************************");
+        client.addSystemMessage("SYSTEM: CONNECTED TO SERVER");
     }
 
     //Handle incoming messages
