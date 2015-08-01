@@ -19,6 +19,8 @@ public class Gameboard extends JPanel
     {
         super();
         this.setLayout(new GridLayout(10, 10, 0, 0));
+        this.setBorder((new CompoundBorder(new EtchedBorder(), new LineBorder(Color.black))));
+        this.setOpaque(false);
     }
     public void paintComponent(Graphics g)
     {
