@@ -5,14 +5,8 @@ import Common.Gameboard;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EtchedBorder;
-import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -30,6 +24,8 @@ public class Client extends JFrame
     private JTextField chatinput;
     private JList who;
     private JPanel displaybox;
+    private JLabel timerdisplay;
+    private JTextArea systemMessages;
 
     public Client(GameFramework framework)
     {
@@ -87,7 +83,66 @@ public class Client extends JFrame
     {
         JPanel center = new JPanel();
         center.setOpaque(false);
+        center.setLayout(new BoxLayout(center, BoxLayout.PAGE_AXIS));
+        timerdisplay = new JLabel();
+        timerdisplay.setAlignmentX(Component.CENTER_ALIGNMENT);
+        timerdisplay.setForeground(Color.WHITE);
+        timerdisplay.setFont(new Font("Serif", Font.BOLD, 25));
+        timerdisplay.setFocusable(false);
+        timerdisplay.setText("GAME TIMER HERE");
+        timerdisplay.setPreferredSize(new Dimension(200, 30));
+        timerdisplay.setOpaque(true);
+        timerdisplay.setBackground(Color.black);
 
+        JPanel cDisplayBoard = new Gameboard();
+        cDisplayBoard.setPreferredSize(new Dimension(200, 200));
+
+        JPanel boardDisplayPanel = new JPanel();
+        boardDisplayPanel.setOpaque(false);
+        boardDisplayPanel.setLayout(new BoxLayout(boardDisplayPanel, BoxLayout.LINE_AXIS));
+        boardDisplayPanel.add(Box.createRigidArea(new Dimension(100, 200)));
+        boardDisplayPanel.add(cDisplayBoard);
+        boardDisplayPanel.add(Box.createRigidArea(new Dimension(100,200)));
+
+        systemMessages = new JTextArea();
+        systemMessages.setEditable(false);
+        systemMessages.setLineWrap(true);
+        systemMessages.setWrapStyleWord(true);
+
+        final JScrollPane systemScroll = new JScrollPane(systemMessages);
+        systemScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+        systemScroll.setOpaque(false);
+        systemMessages.setOpaque(false);
+
+        systemScroll.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                systemMessages.setOpaque(true);
+                systemScroll.setOpaque(true);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                systemMessages.setOpaque(false);
+                systemScroll.setOpaque(false);
+            }
+        });
+
+        JPanel systemdisplaypanel = new JPanel();
+        systemdisplaypanel.setOpaque(false);
+        systemdisplaypanel.setPreferredSize(new Dimension(300, 75));
+        systemdisplaypanel.setLayout(new BoxLayout(systemdisplaypanel, BoxLayout.LINE_AXIS));
+        systemdisplaypanel.add(Box.createRigidArea(new Dimension(400, 75)));
+        systemdisplaypanel.add(systemScroll);
+        systemdisplaypanel.add(Box.createRigidArea(new Dimension(400,75)));
+
+        center.add(Box.createRigidArea(new Dimension(300,25)));
+        center.add(timerdisplay);
+        center.add(Box.createRigidArea(new Dimension(300, 75)));
+        center.add(boardDisplayPanel);
+        center.add(Box.createRigidArea(new Dimension(300,150)));
+        center.add(systemdisplaypanel);
+        center.add(Box.createRigidArea(new Dimension(300,50)));
         this.add(center, BorderLayout.CENTER);
     }
 
@@ -98,9 +153,7 @@ public class Client extends JFrame
         west.setLayout(new BoxLayout(west, BoxLayout.PAGE_AXIS));
         JPanel myBoard = new Gameboard();
         myBoard.setPreferredSize(new Dimension(300, 300));
-        myBoard.setBorder((new CompoundBorder(new EtchedBorder(), new LineBorder(Color.black))));
         west.add(myBoard);
-        myBoard.setOpaque(false);
         chat.setOpaque(false);
         west.setOpaque(false);
         west.add(chat);
