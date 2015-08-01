@@ -108,6 +108,8 @@ public class Client extends JFrame
         systemMessages.setEditable(false);
         systemMessages.setLineWrap(true);
         systemMessages.setWrapStyleWord(true);
+        systemMessages.setForeground(Color.YELLOW);
+        systemMessages.setFont(new Font("Times Roman",Font.BOLD,15));
 
         final JScrollPane systemScroll = new JScrollPane(systemMessages);
         systemScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
@@ -165,12 +167,10 @@ public class Client extends JFrame
         JPanel chatinputpanel = new JPanel(new BorderLayout());
 
         chatinput = new JTextField();
-        chatinput.addKeyListener(new KeyAdapter()
-        {
+        chatinput.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                if ((e.getKeyCode() == KeyEvent.VK_ENTER) && ((e.getModifiers() & KeyEvent.CTRL_MASK) != 0) && !chatinput.getText().equals(""))
-                {
+                if ((e.getKeyCode() == KeyEvent.VK_ENTER) && ((e.getModifiers() & KeyEvent.CTRL_MASK) != 0) && !chatinput.getText().equals("")) {
                     gameFramework.sendChatMessage(chatinput.getText());
                     chatinput.setText("");
                 }
@@ -181,8 +181,7 @@ public class Client extends JFrame
         send.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(!chatinput.getText().equals(""))
-                {
+                if (!chatinput.getText().equals("")) {
                     gameFramework.sendChatMessage(chatinput.getText());
                 }
                 chatinput.setText("");
@@ -194,9 +193,19 @@ public class Client extends JFrame
         chat = new ChatPanel(chatinputpanel);
     }
 
+    /**
+     * This section is for defining methods to update the user display from
+     * messages received from the server.
+     */
+
     public void addIncomingChat(String chatmessage)
     {
         chat.addChat(chatmessage);
+    }
+
+    public void addSystemMessage(String sysmessage)
+    {
+        systemMessages.append(sysmessage +"\n\n");
     }
 
     //test method
