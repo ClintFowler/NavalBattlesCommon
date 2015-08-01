@@ -1,5 +1,7 @@
 package Common;
 
+import game_server.message.Message;
+
 import java.io.*;
 import java.net.Socket;
 
@@ -30,38 +32,41 @@ public class ServerConnection implements Runnable
             out.writeUTF(userid);
             out.flush();
             ObjectInputStream in = new ObjectInputStream(new BufferedInputStream(connection.getInputStream()));
-            while(!connection.isClosed() && connection.isConnected()) {
-                //TODO: Typecast input to NavalMessage object once Trevor builds class.
-                //incomingMessage;
+            gameFramework.serverConnected();
+            Message incomingMessage;
+            while(!connection.isClosed() && connection.isConnected())
+            {
                 try
                 {
-                    //incomingMessage = () in.readObject();
-                    //gameFramework.messageHandler(incomingMessage);
+                    incomingMessage = (Message) in.readObject();
+                    gameFramework.messageHandler(incomingMessage);
                 }catch (NullPointerException e)
                 {
-
-                }//catch (ClassNotFoundException e)
-                //{
-                    //TODO: Handle class not found exception
-                //}
+                    System.out.println("NULL ERROR");
+//                    TODO: NullPointerException
+                }catch (ClassNotFoundException e)
+                {
+                    System.out.println("Class Not Found ERROR");
+//                    TODO: ClassNotFoundException
+                }
             }
 
         }catch (IOException e)
         {
-
+            gameFramework.failedConnection();
         }
 
     }
 
-    protected void sendMessage(/*Messageclass message*/)
+    protected void sendMessage(Message message)
     {
         try
         {
-            //out.writeObject(message);
+            out.writeObject(message);
             out.flush();
         }catch (IOException e)
         {
-
+//            TODO: Failed to write OUTPUT
         }
     }
 }

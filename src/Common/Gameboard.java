@@ -12,20 +12,22 @@ import java.awt.*;
 
 public class Gameboard extends JPanel
 {
+    private int cellWidth;
+    private int cellHeight;
+
     public Gameboard()
     {
-        this.setBorder((new CompoundBorder(new EtchedBorder(),new LineBorder(Color.black))));
-        this.setOpaque(true);
-        this.setLayout(new GridLayout(10,10,0,0));
+        super();
+        this.setLayout(new GridLayout(10, 10, 0, 0));
     }
-    public void paintComponenet(Graphics g)
+    public void paintComponent(Graphics g)
     {
         super.paintComponent(g);
 
         int width = getWidth();
         int height = getHeight();
-        int cellWidth = width/10;
-        int cellHeight = height/10;
+        cellWidth = width/10;
+        cellHeight = height/10;
 
         for(int row = 1; row < 10; row++)
         {
@@ -39,4 +41,27 @@ public class Gameboard extends JPanel
             g.drawLine(hPos,0,hPos,height);
         }
     }
+
+    protected int getCellWidth()
+    {
+        return cellWidth;
+    }
+
+    protected int getCellHeight()
+    {
+        return cellHeight;
+    }
+
+//    public static void main(String[] args)
+//    {
+//        JPanel panel = new Gameboard();
+//        JFrame frame = new JFrame();
+//        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+//        panel.setPreferredSize(new Dimension(300, 300));
+//        frame.setSize(300, 300);
+//        panel.setBorder((new CompoundBorder(new EtchedBorder(), new LineBorder(Color.black))));
+//        frame.add(panel);
+//        frame.setVisible(true);
+//
+//    }
 }

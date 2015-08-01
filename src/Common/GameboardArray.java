@@ -22,61 +22,16 @@ public class GameboardArray implements Serializable {
         gameBoard = new int[xsize][ysize];
         //initializeBoard(); //are we going to initialize to a set value or work with null?
     }
-    
-    public void initializeBoard()
-    {
-    	for(int row = 0; row < xsize; row++)
-    	{
-    		for(int col = 0; col < ysize; col++)
-    		{
-    			gameBoard[row][col] = 7;
-    		}
-    	}
-    }
-    
-    public void printBoard()
-    {
-    	System.out.println("BATTLESHIP\n");
-    	for(int row = 0; row < xsize; row++)
-    	{
-    		for(int col = 0; col < ysize; col++)
-    		{
-    			System.out.print(" " + gameBoard[row][col] + " ");
-    		}
-    		System.out.println();
-    	}
-    }
 
-//    this can be all handled with the printBoard method.
-//    public void printPublicBoard()
-//    {
-//    	System.out.println("BATTLESHIP\n");
-//    	for(int row = 0; row < xsize; row++)
-//    	{
-//    		for(int col = 0; col < ysize; col++)
-//    		{
-//    			if(publicboard[row][col] != 7)
-//    			{
-//    				System.out.print(" " + publicboard[row][col] + " ");
-//    			}
-//    			else
-//    			{
-//    				System.out.print(" ~ ");
-//    			}
-//    		}
-//    		System.out.println();
-//    	}
-//    }
-    
-    public void addShips(int size, int xcoord, int ycoord, String direction)
+    public void addShip(int xcoord, int ycoord, Ship s)
     {
-    	if(direction.equals("horizontal"))
+    	if(s.getDirection().equals(Ship.HORIZONTAL))
     	{
-    		addShipHorizontal(size, xcoord, ycoord);
+    		addShipHorizontal(s.getSize(), xcoord, ycoord);
     	}
     	else
     	{
-    		addShipVertical(size, xcoord, ycoord);
+    		addShipVertical(s.getSize(), xcoord, ycoord);
     	}
     }
     
@@ -116,13 +71,6 @@ public class GameboardArray implements Serializable {
     	}
     }
     
-    //Accessor Methods
-    public int[][] getPublicboard()
-    {
-        int[][] viewableboard = gameBoard.clone();
-
-        return viewableboard;
-    }
 
 	protected void addHit(int x, int y)
 	{
@@ -134,18 +82,5 @@ public class GameboardArray implements Serializable {
 		gameBoard[x][y] = MISS;
 	}
 
-//	  Need to rethink the guessing portion for the gameboard.
-//    public void addGuess(int x, int y)
-//    {
-//        //TODO: addGuess
-//    	if(shipArray[x][y] != 0)
-//    	{
-//    		publicboard[x][y] = HIT;
-//    	}
-//    	else
-//    	{
-//    		publicboard[x][y] = MISS;
-//    	}
-//    }
 }
 

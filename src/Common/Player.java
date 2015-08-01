@@ -1,5 +1,7 @@
 package Common;
 
+import game_server.User;
+
 import java.util.ArrayList;
 
 /**
