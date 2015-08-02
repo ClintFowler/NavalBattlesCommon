@@ -26,6 +26,10 @@ public class Client extends JFrame
     private JPanel displaybox;
     private JLabel timerdisplay;
     private JTextArea systemMessages;
+    private JButton startGButton;
+    private JButton joinGButton;
+    private JButton lockGBoard;
+    private JButton attackButton;
 
     public Client(GameFramework framework)
     {
@@ -100,35 +104,41 @@ public class Client extends JFrame
         JPanel boardDisplayPanel = new JPanel();
         boardDisplayPanel.setOpaque(false);
         boardDisplayPanel.setLayout(new BoxLayout(boardDisplayPanel, BoxLayout.LINE_AXIS));
-        boardDisplayPanel.add(Box.createRigidArea(new Dimension(100, 200)));
+        boardDisplayPanel.add(Box.createRigidArea(new Dimension(150, 200)));
         boardDisplayPanel.add(cDisplayBoard);
-        boardDisplayPanel.add(Box.createRigidArea(new Dimension(100,200)));
+        boardDisplayPanel.add(Box.createRigidArea(new Dimension(150,200)));
 
         systemMessages = new JTextArea();
         systemMessages.setEditable(false);
         systemMessages.setLineWrap(true);
         systemMessages.setWrapStyleWord(true);
         systemMessages.setForeground(Color.YELLOW);
-        systemMessages.setFont(new Font("Times Roman",Font.BOLD,15));
+        systemMessages.setBackground(Color.black);
+        systemMessages.setFont(new Font("Times Roman", Font.BOLD, 15));
 
         final JScrollPane systemScroll = new JScrollPane(systemMessages);
         systemScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-        systemScroll.setOpaque(false);
-        systemMessages.setOpaque(false);
+        systemScroll.setBackground(Color.black);
+        //systemScroll.setOpaque(false);
+        //systemMessages.setOpaque(false);
 
-        systemScroll.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                systemMessages.setOpaque(true);
-                systemScroll.setOpaque(true);
-            }
+//        systemMessages.addMouseListener(new MouseAdapter() {
+//            @Override
+//            public void mouseEntered(MouseEvent e) {
+//                systemMessages.setOpaque(true);
+//                systemScroll.setOpaque(true);
+//            }
+//
+//            @Override
+//            public void mouseExited(MouseEvent e) {
+//                systemMessages.setOpaque(false);
+//                systemScroll.setOpaque(false);
+//            }
+//        });
 
-            @Override
-            public void mouseExited(MouseEvent e) {
-                systemMessages.setOpaque(false);
-                systemScroll.setOpaque(false);
-            }
-        });
+
+
+
 
         JPanel systemdisplaypanel = new JPanel();
         systemdisplaypanel.setOpaque(false);
@@ -136,7 +146,8 @@ public class Client extends JFrame
         systemdisplaypanel.setLayout(new BoxLayout(systemdisplaypanel, BoxLayout.LINE_AXIS));
         systemdisplaypanel.add(Box.createRigidArea(new Dimension(400, 75)));
         systemdisplaypanel.add(systemScroll);
-        systemdisplaypanel.add(Box.createRigidArea(new Dimension(400,75)));
+        systemdisplaypanel.add(Box.createRigidArea(new Dimension(100,75)));
+        systemdisplaypanel.add(createButtonPanel());
 
         center.add(Box.createRigidArea(new Dimension(300,25)));
         center.add(timerdisplay);
@@ -146,6 +157,50 @@ public class Client extends JFrame
         center.add(systemdisplaypanel);
         center.add(Box.createRigidArea(new Dimension(300,50)));
         this.add(center, BorderLayout.CENTER);
+    }
+
+    private JPanel createButtonPanel()
+    {
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setPreferredSize(new Dimension(400, 75));
+        buttonPanel.setOpaque(false);
+        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.LINE_AXIS));
+
+        JPanel leftbuttons = new JPanel();
+        leftbuttons.setPreferredSize(new Dimension(200, 75));
+        leftbuttons.setLayout(new BoxLayout(leftbuttons, BoxLayout.PAGE_AXIS));
+        leftbuttons.setOpaque(false);
+
+        JPanel rightbuttons = new JPanel();
+        rightbuttons.setPreferredSize(new Dimension(200, 75));
+        rightbuttons.setLayout(new BoxLayout(rightbuttons, BoxLayout.PAGE_AXIS));
+        rightbuttons.setOpaque(false);
+
+        Dimension buttonsize = new Dimension(75,35);
+        startGButton = new JButton("Start Game");
+        joinGButton = new JButton("Join Game");
+        lockGBoard = new JButton("Lock Board");
+        attackButton = new JButton("Attack");
+
+        startGButton.setPreferredSize(buttonsize);
+        joinGButton.setPreferredSize(buttonsize);
+        lockGBoard.setPreferredSize(buttonsize);
+        attackButton.setPreferredSize(buttonsize);
+
+        startGButton.setAlignmentX(CENTER_ALIGNMENT);
+        joinGButton.setAlignmentX(CENTER_ALIGNMENT);
+        lockGBoard.setAlignmentX(CENTER_ALIGNMENT);
+        attackButton.setAlignmentX(CENTER_ALIGNMENT);
+
+        leftbuttons.add(startGButton);
+        leftbuttons.add(joinGButton);
+        rightbuttons.add(attackButton);
+        rightbuttons.add(lockGBoard);
+
+        buttonPanel.add(leftbuttons);
+        buttonPanel.add(rightbuttons);
+
+        return buttonPanel;
     }
 
     private void setupWestPanel()
