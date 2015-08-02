@@ -44,12 +44,12 @@ public class Gameboard extends JPanel
         }
     }
 
-    protected int getCellWidth()
+    public int getCellWidth()
     {
         return cellWidth;
     }
 
-    protected int getCellHeight()
+    public int getCellHeight()
     {
         return cellHeight;
     }
