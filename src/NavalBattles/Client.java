@@ -30,6 +30,7 @@ public class Client extends JFrame
     private JButton joinGButton;
     private JButton lockGBoard;
     private JButton attackButton;
+    private Gameboard cDisplayBoard;
 
     public Client(GameFramework framework)
     {
@@ -98,8 +99,14 @@ public class Client extends JFrame
         timerdisplay.setOpaque(true);
         timerdisplay.setBackground(Color.black);
 
-        JPanel cDisplayBoard = new Gameboard();
+        cDisplayBoard = new Gameboard();
         cDisplayBoard.setPreferredSize(new Dimension(200, 200));
+        cDisplayBoard.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                getCellLocation(e.getX(),e.getY());
+            }
+        });
 
         JPanel boardDisplayPanel = new JPanel();
         boardDisplayPanel.setOpaque(false);
@@ -116,29 +123,9 @@ public class Client extends JFrame
         systemMessages.setBackground(Color.black);
         systemMessages.setFont(new Font("Times Roman", Font.BOLD, 15));
 
-        final JScrollPane systemScroll = new JScrollPane(systemMessages);
+        JScrollPane systemScroll = new JScrollPane(systemMessages);
         systemScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
         systemScroll.setBackground(Color.black);
-        //systemScroll.setOpaque(false);
-        //systemMessages.setOpaque(false);
-
-//        systemMessages.addMouseListener(new MouseAdapter() {
-//            @Override
-//            public void mouseEntered(MouseEvent e) {
-//                systemMessages.setOpaque(true);
-//                systemScroll.setOpaque(true);
-//            }
-//
-//            @Override
-//            public void mouseExited(MouseEvent e) {
-//                systemMessages.setOpaque(false);
-//                systemScroll.setOpaque(false);
-//            }
-//        });
-
-
-
-
 
         JPanel systemdisplaypanel = new JPanel();
         systemdisplaypanel.setOpaque(false);
@@ -156,6 +143,7 @@ public class Client extends JFrame
         center.add(Box.createRigidArea(new Dimension(300,150)));
         center.add(systemdisplaypanel);
         center.add(Box.createRigidArea(new Dimension(300,50)));
+
         this.add(center, BorderLayout.CENTER);
     }
 
@@ -248,6 +236,14 @@ public class Client extends JFrame
         chat = new ChatPanel(chatinputpanel);
     }
 
+    private void getCellLocation(int x, int y)
+    {
+        int xcoord = 0;
+        int ycoord = 0;
+        xcoord = (int)Math.floor((x/cDisplayBoard.getCellWidth()));
+        ycoord = (int)Math.floor((y/cDisplayBoard.getCellHeight()));
+//        chat.addChat("X: " + x + " Y: " + y + "Width: " + cDisplayBoard.getCellWidth() + " Height: " + cDisplayBoard.getCellHeight() + " Coordinate: " + xcoord + "," + ycoord);
+    }
     /**
      * This section is for defining methods to update the user display from
      * messages received from the server.
